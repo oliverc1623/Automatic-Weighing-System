@@ -1,38 +1,82 @@
-#%pylab
+%pylab
+
+#%%
 import serial
 import matplotlib
 import matplotlib.pyplot as plt
 import time
 import numpy as np
+ser = serial.Serial('COM3', 9600)
 
+#%%
 
+def tareScale(): #tells arduino to tare the scale
+    ser.write(b'1')    
 
-ser = serial.Serial('/dev/ttyACM0', 9600)
+#%%
+    
+def readScale():
+    ser.write(b'r')
+    line = float(ser.readline())
+    print(line)
+    ser.flush()
+    return line
+    
+#%%
+    
+for i in range(1,100):
+    readScale()
+
+#%%
+
+data = []
+
+for i in range(1,100):
+    data.append(readScale())
+    
+    plt.plot(range(i), data, 'b')
+    plt.ylabel('Weight in Kg')
+    plt.show()
+    plt.pause(0.25)
+    
+#plt.ylabel('Weight in Kg')
+#plt.show()
+
+#%%
 
 # plt.plot([1, 2, 3, 4])
 # plt.ylabel('some numbers')
 # plt.show()
-timeEnd = time.time() + 10
-plt.ion()
 data = []
+
+data = np.zeros(100);   
 
 # start = raw_input("Press t to tare: ")
 # characterList = start
 # ser.write(characterList[0])
-data = np.zeros(100);
 
-for i in range(100):
-	time.sleep(0.05) 
-	data[i] = float(ser.readline())
-	plt.plot(range(i), data[:i])
-	plt.ylabel('Weight in Kg')
-	#plt.show()
-#	if time.time() > timeEnd:
-#		break
+nSamples = 100;
 
+#data = np.zeros(nSamples);
 
-print(data)
+for i in range(nSamples):
+    #time.sleep(0.02)
+    #print (float(ser.readline()))
+    data[i] = float(readScale())
+        
+    #i_plot = np.mod(i, 100)+1; # Reset every 1000 points
+    #if i_plot == 1:
+    #    plt.cla() # Clear the plot
+    
+    
+    plt.plot(range(i), data, 'k')
+    #plt.ylabel('Weight in Kg')
+    #plt.show()
+    plt.pause(0.5)
+    
 
-plt.plot(data)
+#print(data)
+
+#plt.plot(data)
 plt.ylabel('Weight in Kg')
 plt.show()
