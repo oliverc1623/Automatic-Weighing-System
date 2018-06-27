@@ -4,3 +4,6 @@ fopen(obj)
 fclose(obj)
 
 %%
+%Restart Serial port
+%fclose(obj);
+%fclose(obj);

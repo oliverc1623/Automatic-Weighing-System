@@ -11,7 +11,7 @@ function varargout = scale_gui(varargin)
 %
 %      SCALE_GUI('Property','Value',...) creates a new SCALE_GUI or raises the
 %      existing singleton*.  Starting from the left, property value pairs are
-%      applied to the GUI before scale_gui_OpeningFcn gets called.  An
+%      applied to the GUI before scale_gui_OpeningFcn ge ts called.  An
 %      unrecognized property name or invalid value makes property application
 %      stop.  All inputs are passed to scale_gui_OpeningFcn via varargin.
 %
@@ -22,7 +22,7 @@ function varargout = scale_gui(varargin)
 
 % Edit the above text to modify the response to help scale_gui
 
-% Last Modified by GUIDE v2.5 19-Jun-2018 17:01:03
+% Last Modified by GUIDE v2.5 27-Jun-2018 16:07:44
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -57,6 +57,7 @@ handles.output = hObject;
 
 % CLear all instances
 delete(instrfindall)
+cla;
 % Update handles structure
 
 % Initialize serial object
@@ -96,48 +97,40 @@ function readweight_button_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% axis([0,100,-10,10])
-% h = animatedline;
-% data = zeros(1000, 1);
-% i = 1000
-
-% while handles.run || i > 0
-%     for k = 1:100
-%         y = handles.m.readWeight;
-%         data(i) = y;
-%         addpoints(h, k ,y);
-%         drawnow
-%         i = i - 1;
-%     end
-%     clearpoints(h);
-% end
 n_points_to_plot = 500;
 
-for i = 1:1000
-    data(i) = handles.gram_scale*handles.m.readWeight;
-    starti = i-mod(i,n_points_to_plot)+1;
-    plot([1:mod(i, n_points_to_plot)], data(starti:i));
-    title('Weight of Tree Shrews')
-    ylabel('Weight in Grams')
-    xlabel('Trials')
-    drawnow
-    pause(0.1)
-    if mod(i, n_points_to_plot) == 1
-        xlabel('timepoints');ylabel('Grams')
-    end
-    if isappdata(handles.figure1,'stopPlot')
-        rmappdata(handles.figure1,'stopPlot');
-        break
-    end
-    
-    % Lastly update the moving average every 20 frames
-    if mod(i, 10) == 1 & i>=30
-        set(handles.moving_average_text, 'String', ...
-                    sprintf('%3.1f', mean(data(end-30:end))))
-    end
-    
-end
+fileID = fopen('weight_data.txt', 'wt');
 
+go = true;
+while go
+    for i = 1:1000
+        data(i) = handles.gram_scale*handles.m.readWeight;
+        starti = i-mod(i,n_points_to_plot)+1;   
+        %write to file
+        fprintf(fileID, '%s: %s\n', datestr(now,'HH:MM:SS'), num2str(data(i)));
+        %plot graph
+        plot([1:mod(i, n_points_to_plot)], data(starti:i));
+        title('Weight of Tree Shrews')
+        ylabel('Weight in Grams')
+        xlabel('Trials')
+        drawnow
+        pause(0.1)
+        if mod(i, n_points_to_plot) == 1
+            xlabel('timepoints');ylabel('Grams')
+        end
+        if isappdata(handles.figure1,'stopPlot')
+            rmappdata(handles.figure1,'stopPlot');
+            fclose(fileID);
+            break
+        end
+
+        % Lastly update the moving average every 20 frames
+        if mod(i, 10) == 1 & i>=30
+            set(handles.moving_average_text, 'String', ...
+                        sprintf('%3.1f', mean(data(end-30:end))))
+        end
+    end
+end
 guidata(hObject, handles);
 
 % --- Executes on selection change in calibration_menu.

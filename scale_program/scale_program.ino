@@ -14,7 +14,7 @@ void setup() {
   //Serial.println("Press T/t to tare");
   
   float fiveKgCf = -382760; //calibration factor for 5kg load cell old: 45350
-  float oneKgCF = -85000; //calibration factor for 1kg load cell
+  float oneKgCF = -84450; //calibration factor for 1kg load cell
   float twentyKgCF = -128850; // 66650
 
   float calibrationFactor;
@@ -32,7 +32,7 @@ void loop() {
   float f;
 
   float fiveKgCf = -39000; //calibration factor for 5kg load cell
-  float oneKgCF = -85000; //calibration factor for 1kg load cell
+  float oneKgCF = -84450; //calibration factor for 1kg load cell
   float twentyKgCF = -66650; // 66650
 
   if(Serial.available())

@@ -7,6 +7,9 @@ classdef weight_sensor
         
         readByte = 'r';
         tareByte = 't';
+        oneCFactorByte = 's'
+        fiveCFactorByte = 'g'
+        twnetyCFactorByte = 'k'
         
     end
     
@@ -42,6 +45,7 @@ classdef weight_sensor
         
         function closeSensor(obj)
             fclose(obj.serialPort);
+            delete(instrfindall);
         end
         
         function tareScale(obj)
@@ -49,14 +53,17 @@ classdef weight_sensor
         end
         
         function setCalibrationFactor(obj, c)
-            if c==5
+            if c==1
                 fwrite(obj.serialPort, 's')
+                disp('cf set to one')
             end
-            if c==10
+            if c==2
                 fwrite(obj.serialPort, 'g')
+                disp('cf set to five')
             end
-            if c==20
+            if c==3
                 fwrite(obj.serialPort, 'k')
+                disp('cf set to twenty')
             end
         end
     end
