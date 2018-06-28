@@ -22,7 +22,7 @@ function varargout = scale_gui(varargin)
 
 % Edit the above text to modify the response to help scale_gui
 
-% Last Modified by GUIDE v2.5 27-Jun-2018 16:07:44
+% Last Modified by GUIDE v2.5 28-Jun-2018 13:06:10
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -99,38 +99,48 @@ function readweight_button_Callback(hObject, eventdata, handles)
 
 n_points_to_plot = 500;
 
-fileID = fopen('weight_data.txt', 'wt');
+formatOut = 'mm-dd-yy-HH-MM';
+datestr(now,formatOut)
+fileID = fopen(sprintf('weight_data_%s.txt',datestr(now,formatOut) ), 'wt'); 
 
-go = true;
-while go
-    for i = 1:1000
-        data(i) = handles.gram_scale*handles.m.readWeight;
-        starti = i-mod(i,n_points_to_plot)+1;   
-        %write to file
-        fprintf(fileID, '%s: %s\n', datestr(now,'HH:MM:SS'), num2str(data(i)));
-        %plot graph
-        plot([1:mod(i, n_points_to_plot)], data(starti:i));
-        title('Weight of Tree Shrews')
-        ylabel('Weight in Grams')
-        xlabel('Trials')
-        drawnow
-        pause(0.1)
-        if mod(i, n_points_to_plot) == 1
-            xlabel('timepoints');ylabel('Grams')
-        end
-        if isappdata(handles.figure1,'stopPlot')
-            rmappdata(handles.figure1,'stopPlot');
-            fclose(fileID);
-            break
-        end
-
-        % Lastly update the moving average every 20 frames
-        if mod(i, 10) == 1 & i>=30
-            set(handles.moving_average_text, 'String', ...
-                        sprintf('%3.1f', mean(data(end-30:end))))
-        end
+data = zeros(1000, 1); 
+i = 1;
+while 1
+    
+    % Reset before 1000
+    if i == 999
+        i = 1; data = zeros(1000, 1);
     end
+    
+    data(i) = handles.gram_scale*handles.m.readWeight;
+    starti = i-mod(i,n_points_to_plot)+1;   
+    %write to file
+    fprintf(fileID, '%s: %s\n', datestr(now,'HH:MM:SS'), num2str(data(i)));
+    %plot graph
+    plot([1:mod(i, n_points_to_plot)], data(starti:i));
+    title('Weight of Tree Shrews')
+    ylabel('Weight in Grams')
+    xlabel('Trials')
+    drawnow
+    pause(0.1)
+    if mod(i, n_points_to_plot) == 1
+        xlabel('timepoints');ylabel('Grams')
+    end
+    if isappdata(handles.figure1,'stopPlot')
+        rmappdata(handles.figure1,'stopPlot');
+        fclose(fileID);
+        break
+    end
+
+    % Lastly update the moving average every 20 frames
+    if mod(i, 10) == 1 & i>=30
+        set(handles.moving_average_text, 'String', ...
+                    sprintf('%3.1f', mean(data(end-30:end))))
+    end
+    
+    i = i+1; % iterate
 end
+
 guidata(hObject, handles);
 
 % --- Executes on selection change in calibration_menu.
@@ -187,4 +197,28 @@ function end_reading_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 setappdata(handles.figure1,'stopPlot',1);
 % Update handles structure
+guidata(hObject, handles);
+
+
+% --- Executes on button press in load_data.
+function load_data_Callback(hObject, eventdata, handles)
+% hObject    handle to load_data (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+[filename1,filepath1]=uigetfile({'*.*','All Files'},...
+  'Select Data File 1');
+if isequal(filename1,0)
+    disp('user selected cancel');
+else
+     %cd(filepath1);
+  handles.rawdata1=load([filepath1 filename1]);
+  plot(handles.rawdata1);
+  disp(mean(handles.rawdata1));
+  %plot(mean(handles.rawdata1))
+  title('Weight of Tree Shrews');
+  ylabel('Weight in Grams');
+  xlabel('Trials');
+end    
+  
+ 
 guidata(hObject, handles);
