@@ -31,32 +31,40 @@ void loop() {
   
   float f;
 
-  float fiveKgCf = -39000; //calibration factor for 5kg load cell
+  float fiveKgCf = -38000; //calibration factor for 5kg load cell
   float oneKgCF = -84450; //calibration factor for 1kg load cell
   float twentyKgCF = -66650; // 66650
 
   if(Serial.available())
   {
     char temp = Serial.read();
+    //String temp = Serial.readString();
+    //Serial.println(temp);
+    
     if(temp == 't' || temp == 'T')
       scale.tare();  //Reset the scale to zero  
+      
     if(temp == 'r' || temp == 'R')
-     
         //Serial.write(45);
         Serial.println(scale.get_units());
         // Serial.println(scale.get_units());
-
-    if(temp == 's' || temp == 'S')
-        // Set the scaling factor for 1kg
-        scale.set_scale(oneKgCF);
-    if(temp == 'g' || temp == 'G')
-        // Set the scaling factor for 5kg
-        scale.set_scale(fiveKgCf);
-    if(temp == 'k' || temp == 'K')
-        // Set the scaling factor for 20kg
-        scale.set_scale(twentyKgCF);
-        
+//
+//    if(temp == 's' || temp == 'S')
+//        // Set the scaling factor for 1kg
+//        scale.set_scale(oneKgCF);
+//    if(temp == 'g' || temp == 'G')
+//        // Set the scaling factor for 5kg
+//        scale.set_scale(fiveKgCf);
+//    if(temp == 'k' || temp == 'K')
+//        // Set the scaling factor for 20kg
+//        scale.set_scale(twentyKgCF);
+    if(temp == 's'){
+        String cfString = Serial.readString();
+        //Serial.println(cfString);
+        float newCF = cfString.toFloat();
+        scale.set_scale(newCF);  
     }
+  }
 }
 //        char *c_Data = ( char* ) &f;
 //        Serial.println(sizeof(float));

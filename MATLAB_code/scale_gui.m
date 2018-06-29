@@ -22,7 +22,7 @@ function varargout = scale_gui(varargin)
 
 % Edit the above text to modify the response to help scale_gui
 
-% Last Modified by GUIDE v2.5 28-Jun-2018 13:06:10
+% Last Modified by GUIDE v2.5 28-Jun-2018 16:01:34
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -96,6 +96,7 @@ function readweight_button_Callback(hObject, eventdata, handles)
 % hObject    handle to readweight_button (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+%disp(handles.m.readWeight);
 
 n_points_to_plot = 500;
 
@@ -103,7 +104,7 @@ formatOut = 'mm-dd-yy-HH-MM';
 datestr(now,formatOut)
 fileID = fopen(sprintf('weight_data_%s.txt',datestr(now,formatOut) ), 'wt'); 
 
-data = zeros(1000, 1); 
+data = zeros(1000, 1);
 i = 1;
 while 1
     
@@ -162,7 +163,7 @@ switch val
         disp('cf is 1 kg')
     case 2
         handles.m.setCalibrationFactor(val);
-        handles.gram_scale = 102;
+        handles.gram_scale = 95;
         disp('cf is 5kg')
     case 3
         handles.m.setCalibrationFactor(val);
@@ -212,9 +213,9 @@ if isequal(filename1,0)
 else
      %cd(filepath1);
   handles.rawdata1=load([filepath1 filename1]);
-  plot(handles.rawdata1);
-  disp(mean(handles.rawdata1));
-  %plot(mean(handles.rawdata1))
+  plot(handles.rawdata1(:,2));
+  set(handles.moving_average_text, 'String', ...
+                    sprintf('%3.1f', mean(handles.rawdata1(:,2))))
   title('Weight of Tree Shrews');
   ylabel('Weight in Grams');
   xlabel('Trials');
@@ -222,3 +223,95 @@ end
   
  
 guidata(hObject, handles);
+
+% --- Executes on button press in sensor1_checkbox.
+function sensor1_checkbox_Callback(hObject, eventdata, handles)
+% hObject    handle to sensor1_checkbox (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of sensor1_checkbox
+guidata(hObject, handles);
+
+
+
+% --- Executes on button press in sensor2_checkbox.
+function sensor2_checkbox_Callback(hObject, eventdata, handles)
+% hObject    handle to sensor2_checkbox (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of sensor2_checkbox
+guidata(hObject, handles);
+
+
+
+% --- Executes on button press in sensor1_tare.
+function sensor1_tare_Callback(hObject, eventdata, handles)
+% hObject    handle to sensor1_tare (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+guidata(hObject, handles);
+
+
+% --- Executes on button press in sensor2_tare.
+function sensor2_tare_Callback(hObject, eventdata, handles)
+% hObject    handle to sensor2_tare (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+guidata(hObject, handles);
+
+
+
+function sensor1_calibrationF_Callback(hObject, eventdata, handles)
+% hObject    handle to sensor1_calibrationF (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of sensor1_calibrationF as text
+%        str2double(get(hObject,'String')) returns contents of sensor1_calibrationF as a double
+%disp(str2double(get(hObject,'String')));
+
+handles.m.sensor1SetCfactor(get(hObject,'String'));
+
+guidata(hObject, handles);
+
+
+% --- Executes during object creation, after setting all properties.
+function sensor1_calibrationF_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to sensor1_calibrationF (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+guidata(hObject, handles);
+
+
+
+function sensor2_calibrationF_Callback(hObject, eventdata, handles)
+% hObject    handle to sensor2_calibrationF (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of sensor2_calibrationF as text
+%        str2double(get(hObject,'String')) returns contents of sensor2_calibrationF as a double
+guidata(hObject, handles);
+
+
+% --- Executes during object creation, after setting all properties.
+function sensor2_calibrationF_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to sensor2_calibrationF (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+guidata(hObject, handles);
+

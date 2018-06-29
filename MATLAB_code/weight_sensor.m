@@ -7,9 +7,10 @@ classdef weight_sensor
         
         readByte = 'r';
         tareByte = 't';
-        oneCFactorByte = 's'
-        fiveCFactorByte = 'g'
-        twnetyCFactorByte = 'k'
+        cfByte = 'c';
+        oneCFactorByte = 's';
+        fiveCFactorByte = 'g';
+        twnetyCFactorByte = 'k';
         
     end
     
@@ -35,9 +36,9 @@ classdef weight_sensor
         function data = readWeight(obj)
             %METHOD1 Summary of this method goes here
             %   Detailed explanation goes here
-            fwrite(obj.serialPort, obj.readByte)
+            fwrite(obj.serialPort, obj.readByte);
             
-            data = fscanf(obj.serialPort, '%e')   %// cast them to "uint8" if they are not already
+            data = fscanf(obj.serialPort, '%e');   %// cast them to "uint8" if they are not already
             %Afloat = typecast( A , 'double')   %// cast the 4 bytes as a 32 bit float
             
             %data = fread(obj.serialPort,1,'double');
@@ -49,20 +50,29 @@ classdef weight_sensor
         end
         
         function tareScale(obj)
-            fwrite(obj.serialPort, obj.tareByte)
+            fwrite(obj.serialPort, obj.tareByte);
         end
         
+        function sensor1SetCfactor(obj, value)
+            %params = ['c','a'];
+            %fwrite(obj.serialPort, ['s', sprintf('%3.8d', 678)]);
+            fwrite(obj.serialPort, 's');
+            fwrite(obj.serialPort, value);
+            disp(fscanf(obj.serialPort, '%d', 14));
+            %disp(params);
+        end
+       
         function setCalibrationFactor(obj, c)
             if c==1
-                fwrite(obj.serialPort, 's')
+                fwrite(obj.serialPort, obj.oneCFactorByte)
                 disp('cf set to one')
             end
             if c==2
-                fwrite(obj.serialPort, 'g')
+                fwrite(obj.serialPort, obj.fiveCFactorByte)
                 disp('cf set to five')
             end
             if c==3
-                fwrite(obj.serialPort, 'k')
+                fwrite(obj.serialPort, obj.twnetyCFactorByte)
                 disp('cf set to twenty')
             end
         end
