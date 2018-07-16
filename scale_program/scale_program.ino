@@ -46,7 +46,7 @@ void loop() {
       
     if(temp == 'r' || temp == 'R')
         //Serial.write(45);
-        Serial.println(scale.get_units());
+        Serial.println(scale.get_units(), 4);
         // Serial.println(scale.get_units());
 //
 //    if(temp == 's' || temp == 'S')
