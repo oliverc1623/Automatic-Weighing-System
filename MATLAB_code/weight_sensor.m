@@ -11,7 +11,8 @@ classdef weight_sensor
         oneCFactorByte = 's';
         fiveCFactorByte = 'g';
         twnetyCFactorByte = 'k';
-        
+        isrunning = 0;
+        iswriting = 0;
     end
     
     methods
@@ -22,7 +23,7 @@ classdef weight_sensor
                 obj.serialPort = serial(portName, 'BaudRate',9600);
                 set(obj.serialPort,'BaudRate',9600);
                 fopen(obj.serialPort);
-                pause(3);
+                pause(2);
                 
                 % Try to send initialization byte
                 display('Connected to sensor.');
@@ -36,12 +37,11 @@ classdef weight_sensor
         function data = readWeight(obj)
             %METHOD1 Summary of this method goes here
             %   Detailed explanation goes here
-            fwrite(obj.serialPort, obj.readByte);
-            
-            data = fscanf(obj.serialPort, '%e');   %// cast them to "uint8" if they are not already
+            fwrite(obj.serialPort, obj.readByte);            
+            data = fscanf(obj.serialPort, '%g');   %// cast them to "uint8" if they are not already
+            %disp(data);
             %Afloat = typecast( A , 'double')   %// cast the 4 bytes as a 32 bit float
-            
-            %data = fread(obj.serialPort,1,'double');
+            %data = fread(obj.serialPort,2, 'double');
         end
         
         function closeSensor(obj)
@@ -58,24 +58,11 @@ classdef weight_sensor
             %fwrite(obj.serialPort, ['s', sprintf('%3.8d', 678)]);
             fwrite(obj.serialPort, 's');
             fwrite(obj.serialPort, value);
-            disp(fscanf(obj.serialPort, '%d', 14));
+            pause(1);
+            %disp(fscanf(obj.serialPort, '%d', 14));
             %disp(params);
         end
        
-        function setCalibrationFactor(obj, c)
-            if c==1
-                fwrite(obj.serialPort, obj.oneCFactorByte)
-                disp('cf set to one')
-            end
-            if c==2
-                fwrite(obj.serialPort, obj.fiveCFactorByte)
-                disp('cf set to five')
-            end
-            if c==3
-                fwrite(obj.serialPort, obj.twnetyCFactorByte)
-                disp('cf set to twenty')
-            end
-        end
     end
 end
 
