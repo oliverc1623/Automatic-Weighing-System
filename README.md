@@ -3,10 +3,12 @@
 This program, written in MATLAB measures the weight of a lab animal. The program reads the weight in Kg the load cell detects. Additionally, the load cell, Hx711 chip, and arduino are hooked up inside a box such that to 5 Kg load cells acts as one 10 Kg load cell to measure the weight of an animal in a behavior box.
 
 # Table of Contents  
-[Getting Started](#getting-started)  
+=================
+
+* [Getting Started](#getting-started)  
   * [Hardware Prerequisites](#hardware-prerequisites)  
   * [Software Prerequisites](#software-prerequisites)
-[Load cell to Arduino hoolup guide](#load-cell-to-arduino-hookp-guide)
+* [Load cell to Arduino hoolup guide](#load-cell-to-arduino-hookp-guide)
 
 ## Getting Started
 
