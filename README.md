@@ -7,7 +7,6 @@ This program, written in MATLAB measures the weight of a lab animal. The program
   * [Hardware Prerequisites](#hardware-prerequisites)  
   * [Software Prerequisites](#software-prerequisites)
 [Load cell to Arduino hoolup guide](#load-cell-to-arduino-hookp-guide)
-...snip...    
 
 ## Getting Started
 
@@ -33,7 +32,9 @@ If you are using an Arduino Mini install the latest board, Atmel AVR Xplained-mi
 1. Cut the load cell wires and female-to-female jumper wire to shorten them.
 2. Solder the load cell wires to the female-to-female jumper wire
   ex: ![load cell wires soldered to female-to-female jumper wire](https://github.com/oliverc1623/Automatic-Weighing-System/blob/master/load_cell_solder_wire.jpg)
+  
 3.Solder pins to Hx711 chip (pins should come in bag)
+
 4. Connect the jumper wire to the Hx711 chip in the following order:
 
 - Red wire to E+
@@ -49,9 +50,14 @@ If you are using an Arduino Mini install the latest board, Atmel AVR Xplained-mi
 - Purle wire to SCK
 - Red wire to VOC
 
+![load cell wires on Hx711 chip](https://github.com/oliverc1623/Automatic-Weighing-System/blob/master/hx711_closeup.jpg)
+
 6. Connect the Hx711 wires to Arduino
 
 - Black wire to GND
 - Red wire to 5V
 - Blue wire to Digital 3(30)
 - Purple wire to Digital 2(20)
+
+![hx711 wires to arduino](https://github.com/oliverc1623/Automatic-Weighing-System/blob/master/arduino_closeup.jpg)
+
