@@ -8,7 +8,7 @@ This program, written in MATLAB measures the weight of a lab animal. The program
 * [Getting Started](#getting-started)  
   * [Hardware Prerequisites](#hardware-prerequisites)  
   * [Software Prerequisites](#software-prerequisites)
-* [Load cell to Arduino hoolup guide](#load-cell-to-arduino-hookp-guide)
+* [Load cell to Arduino hookup guide](#load-cell-to-arduino-hookup-guide)
 
 ## Getting Started
 
