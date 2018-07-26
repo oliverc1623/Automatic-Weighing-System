@@ -87,4 +87,11 @@ There are two arduino programs in this project. `scale_calibration.ino` allows t
 
 It is recommended to use an Arduino mini (or similar circuit board) to fit everything in a 1.5"x17"x12" box. 
 
-### 
+### Matlab code
+
+In the malab code folder you will see three matlab programs. `weight_sensor.m` is the object class for the weight sensor; a weight sensor object made from this class can call methods such as `x.readWeight()`.
+
+`scale_gui3.m` comes with a gui and theoretically runs for ever until the file it writes to fill the pc's hard drive. This program streamlines the plotting and writing process of each sensor, or in other words, loops through all the active sensors so that the gui plots the weight or write to a txt file. 
+
+`behavior_box.m`takes the average of two 5 Kg load cells. This program is intended to hold the measure the weight of an animal inside the behavior box as it tests. The functionality of the program is nearly the same as `scale_gui3.m`, however, we only activate two sensors and take the average weight in Kg. 
+
