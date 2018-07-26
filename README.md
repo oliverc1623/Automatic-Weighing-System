@@ -9,7 +9,7 @@ This program, written in MATLAB measures the weight of a lab animal. The program
   * [Software Prerequisites](#software-prerequisites)
 * [Load cell to Arduino hookup guide](#load-cell-to-arduino-hookup-guide)
 * [Installation](#installation)
-  * [Arduino code](#arduino-code)
+* [Arduino code](#arduino-code)
 
 ## Getting Started
 
@@ -74,3 +74,8 @@ Also, if you want to know the calibration factor for a specific load cell you ca
 
 ### Arduino code
 
+There are two arduino programs in this project. `scale_calibration.ino` allows the user to quickly change the calibration factor so that the load cell will read the correct weight through the serial monitor in the arduino ide. The second program, `scale_program.ino` prints the weight value (in Kg) to the Serial, at which the matlab program scans and plots it.
+
+It is recommended to use an Arduino mini (or similar circuit board) to fit everything in a 1.5"x17"x12" box. 
+
+### 
