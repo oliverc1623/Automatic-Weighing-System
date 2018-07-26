@@ -4,11 +4,12 @@ This program, written in MATLAB measures the weight of a lab animal. The program
 
 # Table of Contents  
 =================
-
 * [Getting Started](#getting-started)  
   * [Hardware Prerequisites](#hardware-prerequisites)  
   * [Software Prerequisites](#software-prerequisites)
 * [Load cell to Arduino hookup guide](#load-cell-to-arduino-hookup-guide)
+* [Installation](#installation)
+  * [Arduino code](#arduino-code)
 
 ## Getting Started
 
@@ -62,4 +63,8 @@ If you are using an Arduino Mini install the latest board, Atmel AVR Xplained-mi
 - Purple wire to Digital 2(20)
 
 ![hx711 wires to arduino](https://github.com/oliverc1623/Automatic-Weighing-System/blob/master/arduino_closeup.jpg)
+
+## Installation
+
+### Arduino code
 
