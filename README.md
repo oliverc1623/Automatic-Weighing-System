@@ -66,5 +66,7 @@ If you are using an Arduino Mini install the latest board, Atmel AVR Xplained-mi
 
 ## Installation
 
+Download the zip package of this github repository and run the matlab program `scale_gui3.m` in the matlab command window if you wish to run more than 2 load cells, or run `behavior_box.m` in the matlab command window in to measure the weight of an animal inside the behvaior box.
+
 ### Arduino code
 
