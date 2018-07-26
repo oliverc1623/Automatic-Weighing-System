@@ -6,6 +6,7 @@ This program, written in MATLAB measures the weight of a lab animal. The program
 =================
 * [Getting Started](#getting-started)  
   * [Hardware Prerequisites](#hardware-prerequisites)  
+  * [Making the scale box](#making-the-scale-box)
   * [Software Prerequisites](#software-prerequisites)
 * [Load cell to Arduino hookup guide](#load-cell-to-arduino-hookup-guide)
 * [Installation](#installation)
@@ -23,6 +24,14 @@ These instructions will get you a copy of the project up and running on your loc
 - Two USB wires
 - Acrylic box
 - female-to-female jumper wire
+
+### Making the scale box
+
+The first priority in making a scale box is to have a gap between the load cell and surface on which the object lays upon.
+
+For our box we decided to lazer cut 1/4" cast acrylic. The box designs were made with makercase.com and adobe illustrator(for fine adjustments); the sheet in illustrator should match the dimensions of the acrylic sheet you are printing on. 
+
+Checkout the illustrator file to see how we designed the box. 
 
 ### Software Prerequisites
 
