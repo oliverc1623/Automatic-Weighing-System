@@ -26,11 +26,15 @@ These instructions will get you a copy of the project up and running on your loc
 - Acrylic box
 - female-to-female jumper wire
 
-### Making the scale box
+##    Making the scale box
 
 The first priority in making a scale box is to have a gap between the load cell and surface on which the object lays upon.
 
 For our box we decided to lazer cut 1/4" cast acrylic. The box designs were made with makercase.com and adobe illustrator(for fine adjustments); the sheet in illustrator should match the dimensions of the acrylic sheet you are printing on. 
+
+Files for acryilic cut outs will be attached. 
+
+When assembling the box, be sure to use 4mm screws for the top and 5mm screws for the bottom holes. Additionally, there should be even spacing pressing against both sides of the load cell to balance it. It's recommended to use  5-6mm plastic spacers to separate the top sheet from the box. 
 
 Checkout the illustrator file to see how we designed the box. 
 
