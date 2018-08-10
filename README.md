@@ -12,6 +12,7 @@ This program, written in MATLAB measures the weight of a lab animal. The program
 * [Installation](#installation)
 * [Arduino code](#arduino-code)
 * [Matlab code](#matlab-code)
+  * [System_scale](#system-scale)
 
 ## Getting Started
 
@@ -99,4 +100,8 @@ In the malab code folder you will see three matlab programs. `weight_sensor.m` i
 `scale_gui3.m` comes with a gui and theoretically runs for ever until the file it writes to fill the pc's hard drive. This program streamlines the plotting and writing process of each sensor, or in other words, loops through all the active sensors so that the gui plots the weight or write to a txt file. 
 
 `behavior_box.m`takes the average of two 5 Kg load cells. This program is intended to hold the measure the weight of an animal inside the behavior box as it tests. The functionality of the program is nearly the same as `scale_gui3.m`, however, we only activate two sensors and take the average weight in Kg. 
+
+### System scale
+
+
 
