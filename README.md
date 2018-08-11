@@ -101,7 +101,11 @@ In the malab code folder you will see three matlab programs. `weight_sensor.m` i
 
 `behavior_box.m`takes the average of two 5 Kg load cells. This program is intended to hold the measure the weight of an animal inside the behavior box as it tests. The functionality of the program is nearly the same as `scale_gui3.m`, however, we only activate two sensors and take the average weight in Kg. 
 
-### System scale
+#### System scale
 
+System scale is a class in the organizes which sensors to read or write. It also couples the sensors together so that 2 sensors correspond with their respective box. System_scale is also where the sensor objects are instantiated. 
 
+#### Run scale
+
+Run_scale is a program that will run a continuous loop. During this loop the program will plot the weight from each box. Run scale is tied with the program's GUI such that all the logical components of every gui piece is handled here. 
 
