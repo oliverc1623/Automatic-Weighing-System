@@ -13,6 +13,7 @@ This program, written in MATLAB measures the weight of a lab animal. The program
 * [Arduino code](#arduino-code)
 * [Matlab code](#matlab-code)
   * [System_scale](#system-scale)
+  * [Run scale](#run-scale)
 
 ## Getting Started
 
@@ -109,3 +110,7 @@ System scale is a class in the organizes which sensors to read or write. It also
 
 Run_scale is a program that will run a continuous loop. During this loop the program will plot the weight from each box. Run scale is tied with the program's GUI such that all the logical components of every gui piece is handled here. 
 
+#### Scale sensor
+
+Scale_sensor class holds the variables and methods to create a sensor object. The other classes utilize a sensor object to retrieve the sensors data, tare, or set the calibration factor. The constructor accepts one argument that is the com port
+e.g.  `scale_sensor('COM12')`
