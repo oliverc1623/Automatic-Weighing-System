@@ -92,6 +92,10 @@ Also, if you want to know the calibration factor for a specific load cell you ca
 
 There are two arduino programs in this project. `scale_calibration.ino` allows the user to quickly change the calibration factor so that the load cell will read the correct weight through the serial monitor in the arduino ide. The second program, `scale_program.ino` prints the weight value (in Kg) to the Serial, at which the matlab program scans and plots it.
 
+When uploading scale_program to the arduino/mini, it is very important to install the CH340 driver if you are using a non-brand arduino mini like longruner arduinos. https://github.com/HobbyComponents/CH340-Drivers/tree/master/CH341SER
+
+The arudino board should also be set to Amtel atmega328pb Xplained mini
+
 It is recommended to use an Arduino mini (or similar circuit board) to fit everything in a 1.5"x17"x12" box. 
 
 ### Matlab code
